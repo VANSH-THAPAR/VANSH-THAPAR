@@ -2,10 +2,10 @@ import os
 
 # GitHub settings
 GH_TOKEN = os.getenv("GH_TOKEN")
-GH_USERNAME = os.getenv("GH_USERNAME", "VANSH-THAPAR")
+GH_USERNAME = os.getenv("GH_USERNAME") or "VANSH-THAPAR"
 
 # LeetCode settings
-LEETCODE_USERNAME = os.getenv("LEETCODE_USERNAME", "VANSHTHAPAR")
+LEETCODE_USERNAME = os.getenv("LEETCODE_USERNAME") or "vanshthapar"
 
 # Personal info
 NAME = "Vansh Thapar"
