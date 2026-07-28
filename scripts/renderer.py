@@ -11,7 +11,7 @@ logger = setup_logger(__name__)
 
 class LayoutConstants:
     CANVAS_WIDTH = 1600
-    PORTRAIT_WIDTH = 420
+    PORTRAIT_WIDTH = 630
     LINE_HEIGHT = 26
     CHAR_WIDTH = 9.5
     FONT_SIZE = 16
@@ -201,9 +201,9 @@ class ProfileRenderer:
             except Exception as e:
                 logger.error(f"Failed to process portrait: {e}")
                 
-        profile_x = 500
+        profile_x = 700
         profile_y = current_y - LayoutConstants.LINE_HEIGHT
-        builder = SVGTextBuilder(x=profile_x, y=profile_y, max_width=1060)
+        builder = SVGTextBuilder(x=profile_x, y=profile_y, max_width=860)
         
         builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> whoami</tspan>')
         builder.add_line(f'<tspan class="value">{config.NAME}</tspan>')
