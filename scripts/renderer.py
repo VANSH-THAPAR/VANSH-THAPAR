@@ -11,30 +11,7 @@ logger = setup_logger(__name__)
 
 class LayoutConstants:
     CANVAS_WIDTH = 1600
-    CANVAS_HEIGHT = 1200
-    
-    # Portrait
-    PORTRAIT_X = 40
-    PORTRAIT_Y = 110
     PORTRAIT_WIDTH = 420
-    PORTRAIT_HEIGHT = 420
-    
-    # Profile
-    PROFILE_X = 500
-    PROFILE_Y = 70
-    PROFILE_WIDTH = 1060
-    
-    # GitHub
-    GITHUB_X = 40
-    GITHUB_Y = 580
-    GITHUB_WIDTH = 1520
-    
-    # LeetCode
-    LC_X = 40
-    LC_Y = 800
-    LC_WIDTH = 1520
-    
-    # Font Settings
     LINE_HEIGHT = 26
     CHAR_WIDTH = 9.5
     FONT_SIZE = 16
@@ -62,7 +39,6 @@ class SVGTextBuilder:
         comma = "" if is_last else ","
         val_str = f'"{value}"' if is_string else str(value)
         
-        # Simple truncation for extremely long values
         max_chars = int((self.max_width - indent - len(key) - 10) / self.char_width)
         if len(val_str) > max_chars and max_chars > 3:
             val_str = val_str[:max_chars-3] + "..."
@@ -74,7 +50,6 @@ class SVGTextBuilder:
     def wrap_array(self, key, items, indent=20, is_last=False):
         lines = []
         lines.append(f'<tspan x="{self.x + indent}" class="keyword">"{key}"</tspan><tspan class="text">: [</tspan>')
-        
         max_chars = int((self.max_width - indent - 40) / self.char_width)
         
         current_line = []
@@ -88,7 +63,6 @@ class SVGTextBuilder:
             else:
                 current_line.append(item)
                 current_len += len(item) + 4
-                
         if current_line:
             chunks.append(current_line)
             
@@ -102,6 +76,12 @@ class SVGTextBuilder:
         lines.append(f'<tspan x="{self.x + indent}" class="text">]{comma}</tspan>')
         return lines
 
+def render_box(x, y, w, h, title):
+    return f'''
+    <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" class="pane-border"/>
+    <rect x="{x + 15}" y="{y - 10}" width="{len(title)*9.5 + 20}" height="20" class="window" />
+    <text x="{x + 25}" y="{y + 5}" class="pane-title">{title}</text>
+    '''
 
 class ProfileRenderer:
     def __init__(self, template_path: str, portrait_path: str = None):
@@ -124,148 +104,10 @@ class ProfileRenderer:
         except Exception as e:
             logger.error(f"Failed to load SVG files: {e}")
             raise
-
-    def render_portrait(self):
-        if not self.portrait_path or not self.portrait_content:
-            return ""
             
-        try:
-            import xml.etree.ElementTree as ET
-            
-            tree = ET.fromstring(self.portrait_content)
-            
-            viewbox = tree.get('viewBox')
-            width = tree.get('width')
-            height = tree.get('height')
-            
-            orig_w, orig_h = 0.0, 0.0
-            
-            if viewbox:
-                parts = viewbox.split()
-                if len(parts) >= 4:
-                    orig_w = float(parts[2])
-                    orig_h = float(parts[3])
-            
-            if orig_w == 0.0 and width:
-                orig_w = float(width.replace('px', '').replace('%', ''))
-            if orig_h == 0.0 and height:
-                orig_h = float(height.replace('px', '').replace('%', ''))
-                
-            if orig_w == 0.0:
-                orig_w = 1254.0 # fallback
-            if orig_h == 0.0:
-                orig_h = 1254.0
-                
-            scale = LayoutConstants.PORTRAIT_WIDTH / orig_w
-            
-            logger.info(f"Original portrait size: {orig_w}x{orig_h}")
-            logger.info(f"Calculated scale: {scale}")
-            
-            num_children = len(list(tree))
-            ns = ''
-            m = re.match(r'\{.*\}', tree.tag)
-            if m:
-                ns = m.group(0)
-            num_defs = len(tree.findall(f'.//{ns}defs'))
-            
-            logger.info(f"Number of root children imported: {num_children}")
-            logger.info(f"Number of defs imported: {num_defs}")
-            
-            match = re.search(r'<svg[^>]*>', self.portrait_content)
-            if match:
-                start_idx = match.end()
-                end_idx = self.portrait_content.rfind('</svg>')
-                if end_idx != -1:
-                    inner_content = self.portrait_content[start_idx:end_idx].strip()
-                    
-                    prompt_y = LayoutConstants.PORTRAIT_Y - 15
-                    prompt_svg = f'<text x="{LayoutConstants.PORTRAIT_X}" y="{prompt_y}" class="text"><tspan class="prompt">vansh@thapar:~$</tspan> neofetch</text>'
-                    
-                    g_start = f'<g transform="translate({LayoutConstants.PORTRAIT_X},{LayoutConstants.PORTRAIT_Y}) scale({scale})">'
-                    g_end = '</g>'
-                    
-                    return f"{prompt_svg}\n{g_start}\n{inner_content}\n{g_end}"
-                    
-        except Exception as e:
-            logger.error(f"Failed to process portrait.svg: {e}")
-            
-        return ""
-
-    def render_profile_panel(self, github_stats):
-        builder = SVGTextBuilder(
-            x=LayoutConstants.PROFILE_X, 
-            y=LayoutConstants.PROFILE_Y, 
-            max_width=LayoutConstants.PROFILE_WIDTH,
-            line_height=LayoutConstants.LINE_HEIGHT,
-            char_width=LayoutConstants.CHAR_WIDTH
-        )
-        
-        # whoami
-        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> whoami</tspan>')
-        builder.add_line(f'<tspan class="value">{config.NAME}</tspan>')
-        builder.add_line(f'<tspan class="text">{config.OCCUPATION}</tspan>')
-        builder.add_line(f'<tspan class="text">{config.DEGREE}</tspan>')
-        builder.add_line(f'<tspan class="text">{config.COUNTRY}</tspan>')
-        builder.add_empty_line()
-        
-        # uptime
-        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> uptime</tspan>')
-        builder.add_line(f'<tspan class="value">{calculate_age()}</tspan>')
-        builder.add_empty_line()
-        
-        # JSON Profile
-        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> cat profile.json</tspan>')
-        builder.add_line('<tspan class="text">{</tspan>')
-        builder.add_line(builder.kv_line("whoami", config.NAME))
-        builder.add_line(builder.kv_line("kernel", "Windows NT + WSL2"))
-        builder.add_line(builder.kv_line("shell", "PowerShell"))
-        builder.add_line(builder.kv_line("workspace", "Full Stack + AI"))
-        
-        for line in builder.wrap_array("languages", config.PROGRAMMING_LANGUAGES):
-            builder.add_line(line)
-            
-        for line in builder.wrap_array("currently_learning", ["Spark", "BigQuery", "Airflow"]):
-            builder.add_line(line)
-            
-        builder.add_line(builder.kv_line("status", "Building AI products.", is_last=True))
-        builder.add_line('<tspan class="text">}</tspan>')
-        
-        return f'<text class="text">\n{builder.build()}\n</text>'
-        
-    def render_github_panel(self, github_stats):
-        builder = SVGTextBuilder(x=LayoutConstants.GITHUB_X, y=LayoutConstants.GITHUB_Y, max_width=LayoutConstants.GITHUB_WIDTH)
-        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> github</tspan>')
-        text_svg = f'<text class="text">\n{builder.build()}\n</text>'
-        
-        card_y = builder.y + 20
-        spacing = 20
-        num_cards = 5
-        card_w = (LayoutConstants.GITHUB_WIDTH - spacing * (num_cards - 1)) / num_cards
-        card_h = 100
-        
-        cards = [
-            ("Followers", github_stats.get('FOLLOWERS', 0), "★", "Community"),
-            ("Repositories", github_stats.get('REPOS', 0), "📁", "Public Projects"),
-            ("Stars", github_stats.get('STARS', 0), "⭐", "Received"),
-            ("Commits", github_stats.get('COMMITS', 0), "🔨", "Total"),
-            ("Contributions", github_stats.get('CONTRIBUTIONS', 0), "🔥", "This Year")
-        ]
-        
-        svg_parts = [text_svg]
-        
-        for i, (title, value, icon, subtitle) in enumerate(cards):
-            cx = LayoutConstants.GITHUB_X + i * (card_w + spacing)
-            svg_parts.append(f'<rect x="{cx}" y="{card_y}" width="{card_w}" height="{card_h}" rx="12" fill="{{{{TITLE_BAR_BG}}}}" class="border" />')
-            svg_parts.append(f'<text x="{cx + 20}" y="{card_y + 40}" font-size="24">{icon}</text>')
-            svg_parts.append(f'<text x="{cx + 55}" y="{card_y + 35}" class="text keyword" font-size="16">{title}</text>')
-            svg_parts.append(f'<text x="{cx + 55}" y="{card_y + 80}" class="text value" font-size="32" font-weight="bold">{value}</text>')
-            svg_parts.append(f'<text x="{cx + card_w - 20}" y="{card_y + 80}" class="text" font-size="14" text-anchor="end" opacity="0.6">{subtitle}</text>')
-            
-        return "\n".join(svg_parts)
-
     def render_heatmap(self, cal_data, start_x, start_y, max_width):
         if not cal_data:
-            return f'<text x="{start_x + (max_width/2)}" y="{start_y + 40}" class="text keyword" font-size="16" text-anchor="middle">No LeetCode submission data available</text>'
+            return f'<text x="{start_x + (max_width/2)}" y="{start_y + 40}" class="text text-dim" font-size="16" text-anchor="middle">No submission data available</text>', 80
             
         box_size = 14
         gap = 4
@@ -273,9 +115,7 @@ class ProfileRenderer:
         cols = 52
         
         heatmap_width = cols * (box_size + gap)
-        # Center horizontally in the allocated space
         offset_x = start_x + (max_width - heatmap_width) / 2
-        
         now = time.time()
         start_time = now - (cols * 7 * 86400)
         
@@ -284,7 +124,6 @@ class ProfileRenderer:
             for row in range(rows):
                 day_offset = (col * 7 + row)
                 target_time = start_time + (day_offset * 86400)
-                
                 count = 0
                 for ts, c in cal_data.items():
                     if abs(int(ts) - target_time) < 86400:
@@ -297,85 +136,26 @@ class ProfileRenderer:
                 elif count > 0: level = 1
                 
                 level_var = f"{{{{LC_HEATMAP_L{level}}}}}"
-                
                 x_pos = offset_x + col * (box_size + gap)
                 y_pos = start_y + row * (box_size + gap)
-                
                 svg_rects.append(f'<rect x="{x_pos}" y="{y_pos}" width="{box_size}" height="{box_size}" rx="3" fill="{level_var}" />')
         
-        # Add legend
         legend_y = start_y + rows * (box_size + gap) + 15
         legend_x = offset_x + heatmap_width - 150
-        svg_rects.append(f'<text x="{legend_x - 45}" y="{legend_y + 11}" class="text" font-size="12">Less</text>')
+        svg_rects.append(f'<text x="{legend_x - 45}" y="{legend_y + 11}" class="text text-dim" font-size="12">Less</text>')
         for i in range(5):
             lx = legend_x + i * (box_size + gap)
             level_var = f"{{{{LC_HEATMAP_L{i}}}}}"
             svg_rects.append(f'<rect x="{lx}" y="{legend_y}" width="{box_size}" height="{box_size}" rx="2" fill="{level_var}" />')
-        svg_rects.append(f'<text x="{legend_x + 5 * (box_size + gap) + 10}" y="{legend_y + 11}" class="text" font-size="12">More</text>')
+        svg_rects.append(f'<text x="{legend_x + 5 * (box_size + gap) + 10}" y="{legend_y + 11}" class="text text-dim" font-size="12">More</text>')
                 
-        return "\n".join(svg_rects)
-
-    def render_leetcode_panel(self, lc_stats):
-        builder = SVGTextBuilder(
-            x=LayoutConstants.LC_X,
-            y=LayoutConstants.LC_Y,
-            max_width=LayoutConstants.LC_WIDTH,
-            line_height=LayoutConstants.LINE_HEIGHT,
-            char_width=LayoutConstants.CHAR_WIDTH
-        )
-        
-        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> leetcode</tspan>')
-        text_svg = f'<text class="text">\n{builder.build()}\n</text>'
-        
-        start_y = builder.y + 20
-        svg_parts = [text_svg]
-        
-        bar_w = 400
-        cx = LayoutConstants.LC_X
-        
-        svg_parts.append(f'<text x="{cx}" y="{start_y + 20}" class="text keyword">Username:</text>')
-        svg_parts.append(f'<text x="{cx + 100}" y="{start_y + 20}" class="text value">{config.LEETCODE_USERNAME}</text>')
-        
-        svg_parts.append(f'<text x="{cx}" y="{start_y + 50}" class="text keyword">Global Rank:</text>')
-        svg_parts.append(f'<text x="{cx + 130}" y="{start_y + 50}" class="text value">{lc_stats.get("LC_RANKING", "N/A")}</text>')
-
-        svg_parts.append(f'<text x="{cx}" y="{start_y + 80}" class="text keyword">Contest Rating:</text>')
-        svg_parts.append(f'<text x="{cx + 160}" y="{start_y + 80}" class="text value">{lc_stats.get("LC_RATING", "N/A")}</text>')
-
-        bx = cx + 400
-        easy = int(lc_stats.get('LC_EASY', 0))
-        med = int(lc_stats.get('LC_MEDIUM', 0))
-        hard = int(lc_stats.get('LC_HARD', 0))
-        total = int(lc_stats.get('LC_SOLVED', 0))
-        
-        def draw_bar(y, label, val, total_val, color):
-            pct = (val / max(1, total_val)) * bar_w
-            return [
-                f'<text x="{bx}" y="{y}" class="text" font-size="14">{label}</text>',
-                f'<text x="{bx + bar_w}" y="{y}" class="text value" font-size="14" text-anchor="end">{val}</text>',
-                f'<rect x="{bx}" y="{y + 10}" width="{bar_w}" height="8" rx="4" fill="{{{{TITLE_BAR_BG}}}}" />',
-                f'<rect x="{bx}" y="{y + 10}" width="{pct}" height="8" rx="4" fill="{color}" />'
-            ]
-            
-        svg_parts.extend(draw_bar(start_y, "Easy", easy, total, "#28a745"))
-        svg_parts.extend(draw_bar(start_y + 40, "Medium", med, total, "#ffc107"))
-        svg_parts.extend(draw_bar(start_y + 80, "Hard", hard, total, "#dc3545"))
-        
-        heatmap_start_y = start_y + 120
-        cal_data = lc_stats.get("LC_CALENDAR", {})
-        heatmap_svg = self.render_heatmap(cal_data, LayoutConstants.LC_X, heatmap_start_y, LayoutConstants.LC_WIDTH)
-        svg_parts.append(heatmap_svg)
-        
-        return "\n".join(svg_parts)
+        return "\n".join(svg_rects), (rows * (box_size + gap) + 40)
 
     def render(self, output_path: str, theme_name: str, github_stats: dict, leetcode_stats: dict):
         content = self.template_content
-        
-        required_placeholders = ["{{PORTRAIT}}", "{{PROFILE}}", "{{GITHUB}}", "{{LEETCODE}}"]
-        for p in required_placeholders:
-            if p not in content:
-                raise ValueError(f"CRITICAL ERROR: Placeholder {p} is missing from template.svg!")
-                
+        if "{{CONTENT}}" not in content:
+            raise ValueError("CRITICAL ERROR: Placeholder {{CONTENT}} is missing from template.svg!")
+            
         theme = config.THEMES.get(theme_name, config.THEMES["dark"])
         for k, v in theme.items():
             content = content.replace(f"{{{{{k.upper()}}}}}", v)
@@ -393,17 +173,170 @@ class ProfileRenderer:
             content = content.replace("{{LC_HEATMAP_L3}}", "#30a14e")
             content = content.replace("{{LC_HEATMAP_L4}}", "#216e39")
             
-        placeholders = {
-            "{{PORTRAIT}}": self.render_portrait(),
-            "{{PROFILE}}": self.render_profile_panel(github_stats),
-            "{{GITHUB}}": self.render_github_panel(github_stats),
-            "{{LEETCODE}}": self.render_leetcode_panel(leetcode_stats)
-        }
+        svg_parts = []
+        current_y = 80
         
-        for k, v in placeholders.items():
-            content = content.replace(k, str(v))
-            
-        logger.info(f"Placeholder replacement success for {theme_name} mode.")
+        # 1. PROFILE SECTION (whoami, uptime, cat config, and portrait on left)
+        portrait_x = 40
+        portrait_y = current_y
+        portrait_end_y = current_y
+        portrait_svg = ""
+        
+        if self.portrait_path and self.portrait_content:
+            try:
+                import xml.etree.ElementTree as ET
+                tree = ET.fromstring(self.portrait_content)
+                orig_w = float(tree.get('width', '1254').replace('px','').replace('%',''))
+                orig_h = float(tree.get('height', '1254').replace('px','').replace('%',''))
+                scale = LayoutConstants.PORTRAIT_WIDTH / orig_w
+                portrait_actual_h = orig_h * scale
+                
+                match = re.search(r'<svg[^>]*>', self.portrait_content)
+                if match:
+                    inner = self.portrait_content[match.end():self.portrait_content.rfind('</svg>')].strip()
+                    prompt = f'<text x="{portrait_x}" y="{portrait_y + 16}" class="text"><tspan class="prompt">vansh@thapar:~$</tspan> neofetch</text>'
+                    g = f'<g transform="translate({portrait_x},{portrait_y + 40}) scale({scale})">{inner}</g>'
+                    portrait_svg = f"{prompt}\n{g}"
+                    portrait_end_y = portrait_y + 40 + portrait_actual_h
+            except Exception as e:
+                logger.error(f"Failed to process portrait: {e}")
+                
+        profile_x = 500
+        profile_y = current_y - LayoutConstants.LINE_HEIGHT
+        builder = SVGTextBuilder(x=profile_x, y=profile_y, max_width=1060)
+        
+        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> whoami</tspan>')
+        builder.add_line(f'<tspan class="value">{config.NAME}</tspan>')
+        builder.add_line(f'<tspan class="text">{config.OCCUPATION} @ {config.COMPANY}</tspan>')
+        builder.add_line(f'<tspan class="text">{config.DEGREE}</tspan>')
+        builder.add_line(f'<tspan class="text">{config.COUNTRY}</tspan>')
+        builder.add_empty_line()
+        
+        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> uptime</tspan>')
+        builder.add_line(f'<tspan class="value">{calculate_age()}</tspan>')
+        builder.add_empty_line()
+        
+        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> cat ~/.config/profile.json</tspan>')
+        builder.add_line('<tspan class="text">{</tspan>')
+        builder.add_line(builder.kv_line("name", config.NAME))
+        builder.add_line(builder.kv_line("role", config.OCCUPATION))
+        builder.add_line(builder.kv_line("organization", config.COMPANY))
+        builder.add_line(builder.kv_line("education", config.DEGREE))
+        builder.add_line(builder.kv_line("location", config.COUNTRY))
+        builder.add_line(builder.kv_line("uptime", calculate_age()))
+        for line in builder.wrap_array("specialization", ["Full Stack", "AI / ML", "Cloud"]):
+            builder.add_line(line)
+        for line in builder.wrap_array("toolbox", config.PROGRAMMING_LANGUAGES):
+            builder.add_line(line)
+        builder.add_line(builder.kv_line("currently_building", "Scalable AI-powered applications"))
+        builder.add_line(builder.kv_line("status", "Always shipping."))
+        
+        builder.add_line(f'<tspan x="{builder.x + 20}" class="keyword">"contact"</tspan><tspan class="text">: {{</tspan>')
+        builder.add_line(builder.kv_line("email", config.EMAIL, indent=40))
+        builder.add_line(builder.kv_line("linkedin", config.LINKEDIN, indent=40, is_last=True))
+        builder.add_line(f'<tspan x="{builder.x + 20}" class="text">}}</tspan>')
+        builder.add_line('<tspan class="text">}</tspan>')
+        
+        profile_end_y = builder.y
+        svg_parts.append(portrait_svg)
+        svg_parts.append(f'<text class="text">\n{builder.build()}\n</text>')
+        
+        current_y = max(portrait_end_y, profile_end_y) + 60
+        
+        # 2. GITHUB DASHBOARD
+        gh_builder = SVGTextBuilder(x=40, y=current_y - LayoutConstants.LINE_HEIGHT, max_width=1520)
+        gh_builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> github</tspan>')
+        svg_parts.append(f'<text class="text">\n{gh_builder.build()}\n</text>')
+        current_y = gh_builder.y + 30
+        
+        gh_box_h = 160
+        svg_parts.append(render_box(40, current_y, 480, gh_box_h, "Repository Overview"))
+        svg_parts.append(f'<text x="60" y="{current_y + 45}" class="text">Stars:      <tspan class="value">{github_stats.get("STARS", 0)}</tspan></text>')
+        svg_parts.append(f'<text x="60" y="{current_y + 85}" class="text">Repos:      <tspan class="value">{github_stats.get("REPOS", 0)}</tspan></text>')
+        svg_parts.append(f'<text x="60" y="{current_y + 125}" class="text">Followers:  <tspan class="value">{github_stats.get("FOLLOWERS", 0)}</tspan></text>')
+        
+        svg_parts.append(render_box(540, current_y, 560, gh_box_h, "Contribution Activity"))
+        contribs = int(github_stats.get("CONTRIBUTIONS", 0))
+        commits = int(github_stats.get("COMMITS", 0))
+        bar_w = 340
+        c_pct = min(1, contribs / max(1, 2000)) * bar_w
+        svg_parts.append(f'<text x="560" y="{current_y + 60}" class="text">Contributions</text>')
+        svg_parts.append(f'<rect x="710" y="{current_y + 50}" width="{bar_w}" height="10" rx="3" class="chart-bar-bg" />')
+        svg_parts.append(f'<rect x="710" y="{current_y + 50}" width="{c_pct}" height="10" rx="3" class="chart-bar-fg" />')
+        svg_parts.append(f'<text x="{710 + bar_w + 10}" y="{current_y + 60}" class="text value" font-size="14">{contribs}</text>')
+        
+        com_pct = min(1, commits / max(1, 1000)) * bar_w
+        svg_parts.append(f'<text x="560" y="{current_y + 110}" class="text">Commits</text>')
+        svg_parts.append(f'<rect x="710" y="{current_y + 100}" width="{bar_w}" height="10" rx="3" class="chart-bar-bg" />')
+        svg_parts.append(f'<rect x="710" y="{current_y + 100}" width="{com_pct}" height="10" rx="3" class="chart-bar-fg" />')
+        svg_parts.append(f'<text x="{710 + bar_w + 10}" y="{current_y + 110}" class="text value" font-size="14">{commits}</text>')
+        
+        svg_parts.append(render_box(1120, current_y, 440, gh_box_h, "System Status"))
+        svg_parts.append(f'<text x="1140" y="{current_y + 60}" class="text keyword">SYSTEM HEALTH: OPTIMAL</text>')
+        svg_parts.append(f'<text x="1140" y="{current_y + 100}" class="text text-dim">Syncing daily with GitHub API...</text>')
+        
+        current_y += gh_box_h + 60
+        
+        # 3. LEETCODE DASHBOARD
+        lc_builder = SVGTextBuilder(x=40, y=current_y - LayoutConstants.LINE_HEIGHT, max_width=1520)
+        lc_builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> leetcode</tspan>')
+        svg_parts.append(f'<text class="text">\n{lc_builder.build()}\n</text>')
+        current_y = lc_builder.y + 30
+        
+        lc_box_y = current_y
+        lc_cy = current_y + 40
+        
+        # Content inside box
+        svg_parts.append(f'<text x="60" y="{lc_cy}" class="text keyword">User: <tspan class="value">{config.LEETCODE_USERNAME}</tspan></text>')
+        svg_parts.append(f'<text x="360" y="{lc_cy}" class="text keyword">Rank: <tspan class="value">{leetcode_stats.get("LC_RANKING", "N/A")}</tspan></text>')
+        svg_parts.append(f'<text x="660" y="{lc_cy}" class="text keyword">Rating: <tspan class="value">{leetcode_stats.get("LC_RATING", "N/A")}</tspan></text>')
+        
+        lc_cy += 60
+        easy = int(leetcode_stats.get("LC_EASY", 0))
+        med = int(leetcode_stats.get("LC_MEDIUM", 0))
+        hard = int(leetcode_stats.get("LC_HARD", 0))
+        total = int(leetcode_stats.get("LC_SOLVED", 0))
+        
+        bar_w = 400
+        def draw_lc_bar(x, y, label, val, color):
+            pct = (val / max(1, total)) * bar_w
+            return f'''
+            <text x="{x}" y="{y}" class="text">{label}</text>
+            <text x="{x + bar_w}" y="{y}" class="text value" text-anchor="end">{val}</text>
+            <rect x="{x}" y="{y + 10}" width="{bar_w}" height="8" rx="4" class="chart-bar-bg" />
+            <rect x="{x}" y="{y + 10}" width="{pct}" height="8" rx="4" fill="{color}" />
+            '''
+        
+        svg_parts.append(draw_lc_bar(60, lc_cy, "Easy", easy, "#28a745"))
+        svg_parts.append(draw_lc_bar(560, lc_cy, "Medium", med, "#ffc107"))
+        svg_parts.append(draw_lc_bar(1060, lc_cy, "Hard", hard, "#dc3545"))
+        
+        lc_cy += 80
+        svg_parts.append(f'<text x="60" y="{lc_cy}" class="pane-title">Submission Calendar</text>')
+        lc_cy += 20
+        cal_data = leetcode_stats.get("LC_CALENDAR", {})
+        heatmap_svg, hm_height = self.render_heatmap(cal_data, 60, lc_cy, 1480)
+        svg_parts.append(heatmap_svg)
+        
+        lc_cy += hm_height
+        lc_box_h = lc_cy - lc_box_y
+        svg_parts.insert(len(svg_parts) - 6, render_box(40, lc_box_y, 1520, lc_box_h, "LeetCode Analytics"))
+        
+        current_y = lc_box_y + lc_box_h + 60
+        
+        # 4. EXIT
+        exit_builder = SVGTextBuilder(x=40, y=current_y - LayoutConstants.LINE_HEIGHT, max_width=1520)
+        exit_builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> exit</tspan>')
+        exit_builder.add_line('<tspan class="text text-dim">logout</tspan>')
+        exit_builder.add_line('<tspan class="text text-dim">Session terminated.</tspan>')
+        svg_parts.append(f'<text class="text">\n{exit_builder.build()}\n</text>')
+        
+        current_y = exit_builder.y + 60
+        
+        content = content.replace("{{CANVAS_HEIGHT}}", str(int(current_y)))
+        content = content.replace("{{CONTENT}}", "\n".join(svg_parts))
+        
+        logger.info(f"Placeholder replacement success for {theme_name} mode. Dynamic Canvas Height: {int(current_y)}")
             
         try:
             with open(output_path, 'w', encoding='utf-8') as f:
