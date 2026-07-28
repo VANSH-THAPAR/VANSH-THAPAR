@@ -35,24 +35,20 @@
 <tspan x="500" y="200"><tspan class="text">India</tspan></tspan>
 <tspan x="500" y="252"><tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> uptime</tspan></tspan>
 <tspan x="500" y="278"><tspan class="value">20y 11m 14d</tspan></tspan>
-<tspan x="500" y="330"><tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> hostname</tspan></tspan>
-<tspan x="500" y="356"><tspan class="value">Lenovo IdeaPad Gaming 3</tspan></tspan>
-<tspan x="500" y="408"><tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> cat profile.json</tspan></tspan>
-<tspan x="500" y="434"><tspan class="text">{</tspan></tspan>
-<tspan x="500" y="460"><tspan x="520" class="keyword">"whoami"</tspan><tspan class="text">: </tspan><tspan class="string">"Vansh Thapar"</tspan><tspan class="text">,</tspan></tspan>
-<tspan x="500" y="486"><tspan x="520" class="keyword">"kernel"</tspan><tspan class="text">: </tspan><tspan class="string">"Windows NT + WSL2"</tspan><tspan class="text">,</tspan></tspan>
-<tspan x="500" y="512"><tspan x="520" class="keyword">"shell"</tspan><tspan class="text">: </tspan><tspan class="string">"PowerShell"</tspan><tspan class="text">,</tspan></tspan>
-<tspan x="500" y="538"><tspan x="520" class="keyword">"editor"</tspan><tspan class="text">: </tspan><tspan class="string">"VS Code"</tspan><tspan class="text">,</tspan></tspan>
-<tspan x="500" y="564"><tspan x="520" class="keyword">"workspace"</tspan><tspan class="text">: </tspan><tspan class="string">"Full Stack + AI"</tspan><tspan class="text">,</tspan></tspan>
-<tspan x="500" y="590"><tspan x="520" class="keyword">"toolchain"</tspan><tspan class="text">: [</tspan></tspan>
-<tspan x="500" y="616"><tspan x="540" class="value">"React", "Node.js", "Express", "FastAPI", "Flask", "Docker", "GCP", "BigQuery", "Apache Airflow",</tspan></tspan>
-<tspan x="500" y="642"><tspan x="540" class="value">"Apache Spark", "LangChain", "LangGraph", "MongoDB", "postgreSQL"</tspan></tspan>
-<tspan x="500" y="668"><tspan x="520" class="text">],</tspan></tspan>
-<tspan x="500" y="694"><tspan x="520" class="keyword">"currently_learning"</tspan><tspan class="text">: [</tspan></tspan>
-<tspan x="500" y="720"><tspan x="540" class="value">"Spark", "BigQuery", "Airflow"</tspan></tspan>
-<tspan x="500" y="746"><tspan x="520" class="text">],</tspan></tspan>
-<tspan x="500" y="772"><tspan x="520" class="keyword">"status"</tspan><tspan class="text">: </tspan><tspan class="string">"Building AI products."</tspan><tspan class="text"></tspan></tspan>
-<tspan x="500" y="798"><tspan class="text">}</tspan></tspan>
+<tspan x="500" y="330"><tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> cat profile.json</tspan></tspan>
+<tspan x="500" y="356"><tspan class="text">{</tspan></tspan>
+<tspan x="500" y="382"><tspan x="520" class="keyword">"whoami"</tspan><tspan class="text">: </tspan><tspan class="string">"Vansh Thapar"</tspan><tspan class="text">,</tspan></tspan>
+<tspan x="500" y="408"><tspan x="520" class="keyword">"kernel"</tspan><tspan class="text">: </tspan><tspan class="string">"Windows NT + WSL2"</tspan><tspan class="text">,</tspan></tspan>
+<tspan x="500" y="434"><tspan x="520" class="keyword">"shell"</tspan><tspan class="text">: </tspan><tspan class="string">"PowerShell"</tspan><tspan class="text">,</tspan></tspan>
+<tspan x="500" y="460"><tspan x="520" class="keyword">"workspace"</tspan><tspan class="text">: </tspan><tspan class="string">"Full Stack + AI"</tspan><tspan class="text">,</tspan></tspan>
+<tspan x="500" y="486"><tspan x="520" class="keyword">"languages"</tspan><tspan class="text">: [</tspan></tspan>
+<tspan x="500" y="512"><tspan x="540" class="value">"C++", "Python", "JavaScript", "TypeScript", "SQL"</tspan></tspan>
+<tspan x="500" y="538"><tspan x="520" class="text">],</tspan></tspan>
+<tspan x="500" y="564"><tspan x="520" class="keyword">"currently_learning"</tspan><tspan class="text">: [</tspan></tspan>
+<tspan x="500" y="590"><tspan x="540" class="value">"Spark", "BigQuery", "Airflow"</tspan></tspan>
+<tspan x="500" y="616"><tspan x="520" class="text">],</tspan></tspan>
+<tspan x="500" y="642"><tspan x="520" class="keyword">"status"</tspan><tspan class="text">: </tspan><tspan class="string">"Building AI products."</tspan><tspan class="text"></tspan></tspan>
+<tspan x="500" y="668"><tspan class="text">}</tspan></tspan>
 </text>
   <text class="text">
 <tspan x="40" y="606"><tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> github</tspan></tspan>

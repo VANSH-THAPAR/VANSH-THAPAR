@@ -16,8 +16,6 @@ DEGREE = "B.E in Computer Science and Engineering"
 COUNTRY = "India"
 BIRTHDAY = "2005-08-14"
 OS_LIST = ["Windows", "Linux"]
-HOST = "Lenovo IdeaPad Gaming 3"
-IDE = "VS Code"
 
 PROGRAMMING_LANGUAGES = ["C++", "Python", "JavaScript", "TypeScript", "SQL"]
 LANGUAGES_SPOKEN = ["English", "Hindi", "Punjabi"]

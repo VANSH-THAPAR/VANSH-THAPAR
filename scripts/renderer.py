@@ -213,21 +213,15 @@ class ProfileRenderer:
         builder.add_line(f'<tspan class="value">{calculate_age()}</tspan>')
         builder.add_empty_line()
         
-        # hostname
-        builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> hostname</tspan>')
-        builder.add_line(f'<tspan class="value">{config.HOST}</tspan>')
-        builder.add_empty_line()
-        
         # JSON Profile
         builder.add_line('<tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> cat profile.json</tspan>')
         builder.add_line('<tspan class="text">{</tspan>')
         builder.add_line(builder.kv_line("whoami", config.NAME))
         builder.add_line(builder.kv_line("kernel", "Windows NT + WSL2"))
         builder.add_line(builder.kv_line("shell", "PowerShell"))
-        builder.add_line(builder.kv_line("editor", config.IDE))
         builder.add_line(builder.kv_line("workspace", "Full Stack + AI"))
         
-        for line in builder.wrap_array("toolchain", config.TECHNOLOGIES):
+        for line in builder.wrap_array("languages", config.PROGRAMMING_LANGUAGES):
             builder.add_line(line)
             
         for line in builder.wrap_array("currently_learning", ["Spark", "BigQuery", "Airflow"]):
