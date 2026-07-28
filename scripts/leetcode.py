@@ -82,5 +82,6 @@ def fetch_leetcode_stats() -> dict:
         logger.error(f"Failed to fetch LeetCode stats: {e}")
         return {
             "LC_RATING": "N/A", "LC_RANKING": "N/A", "LC_SOLVED": "N/A",
-            "LC_EASY": "N/A", "LC_MEDIUM": "N/A", "LC_HARD": "N/A"
+            "LC_EASY": "N/A", "LC_MEDIUM": "N/A", "LC_HARD": "N/A",
+            "LC_CALENDAR": {}
         }
