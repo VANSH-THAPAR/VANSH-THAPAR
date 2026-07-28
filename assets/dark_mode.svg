@@ -70,7 +70,7 @@
     <rect x="55" y="914" width="200.5" height="20" class="window" />
     <text x="65" y="929" class="pane-title">Repository Overview</text>
     
-<text x="60" y="969" class="text">Stars:      <tspan class="value">6</tspan></text>
+<text x="60" y="969" class="text">Stars:      <tspan class="value">7</tspan></text>
 <text x="60" y="1009" class="text">Repos:      <tspan class="value">64</tspan></text>
 <text x="60" y="1049" class="text">Followers:  <tspan class="value">20</tspan></text>
 
@@ -80,12 +80,12 @@
     
 <text x="560" y="984" class="text">Contributions</text>
 <rect x="710" y="974" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="974" width="117.80999999999999" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="984" class="text value" font-size="14">693</text>
+<rect x="710" y="974" width="170.0" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="984" class="text value" font-size="14">1000</text>
 <text x="560" y="1034" class="text">Commits</text>
 <rect x="710" y="1024" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="1024" width="95.2" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="1034" class="text value" font-size="14">280</text>
+<rect x="710" y="1024" width="148.92" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="1034" class="text value" font-size="14">438</text>
 
     <rect x="1120" y="924" width="440" height="160" rx="6" class="pane-border"/>
     <rect x="1135" y="914" width="143.5" height="20" class="window" />
