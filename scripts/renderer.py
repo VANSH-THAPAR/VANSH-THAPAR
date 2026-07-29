@@ -109,24 +109,45 @@ class ProfileRenderer:
         if not cal_data:
             return f'<text x="{start_x + (max_width/2)}" y="{start_y + 40}" class="text text-dim" font-size="16" text-anchor="middle">No submission data available</text>', 80
             
-        box_size = 14
-        gap = 4
+        box_size = 15
+        gap = 5
         rows = 7
         cols = 52
         
+        from datetime import datetime, timedelta
+        
         heatmap_width = cols * (box_size + gap)
-        offset_x = start_x + (max_width - heatmap_width) / 2
-        now = time.time()
-        start_time = now - (cols * 7 * 86400)
+        offset_x = start_x + (max_width - heatmap_width) / 2 + 20
+        
+        today = datetime.now()
+        start_date = today - timedelta(days=cols * 7 - 1)
         
         svg_rects = []
+        
+        month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        current_month = -1
+        
+        for col in range(cols):
+            target_date = start_date + timedelta(days=col * 7)
+            month_idx = target_date.month - 1
+            if month_idx != current_month:
+                if col < cols - 2:
+                    svg_rects.append(f'<text x="{offset_x + col * (box_size + gap)}" y="{start_y - 10}" class="text text-dim" font-size="13">{month_names[month_idx]}</text>')
+                current_month = month_idx
+
+        svg_rects.append(f'<text x="{offset_x - 35}" y="{start_y + (box_size + gap) * 1 + 12}" class="text text-dim" font-size="13">Mon</text>')
+        svg_rects.append(f'<text x="{offset_x - 35}" y="{start_y + (box_size + gap) * 3 + 12}" class="text text-dim" font-size="13">Wed</text>')
+        svg_rects.append(f'<text x="{offset_x - 35}" y="{start_y + (box_size + gap) * 5 + 12}" class="text text-dim" font-size="13">Fri</text>')
+
         for col in range(cols):
             for row in range(rows):
                 day_offset = (col * 7 + row)
-                target_time = start_time + (day_offset * 86400)
+                target_date = start_date + timedelta(days=day_offset)
+                target_timestamp = target_date.timestamp()
+                
                 count = 0
                 for ts, c in cal_data.items():
-                    if abs(int(ts) - target_time) < 86400:
+                    if abs(int(ts) - target_timestamp) < 86400:
                         count += c
                         
                 level = 0
@@ -138,18 +159,18 @@ class ProfileRenderer:
                 level_var = f"{{{{LC_HEATMAP_L{level}}}}}"
                 x_pos = offset_x + col * (box_size + gap)
                 y_pos = start_y + row * (box_size + gap)
-                svg_rects.append(f'<rect x="{x_pos}" y="{y_pos}" width="{box_size}" height="{box_size}" rx="3" fill="{level_var}" />')
+                svg_rects.append(f'<rect x="{x_pos}" y="{y_pos}" width="{box_size}" height="{box_size}" rx="4" fill="{level_var}" />')
         
-        legend_y = start_y + rows * (box_size + gap) + 15
-        legend_x = offset_x + heatmap_width - 150
-        svg_rects.append(f'<text x="{legend_x - 45}" y="{legend_y + 11}" class="text text-dim" font-size="12">Less</text>')
+        legend_y = start_y + rows * (box_size + gap) + 20
+        legend_x = offset_x + heatmap_width - 160
+        svg_rects.append(f'<text x="{legend_x - 45}" y="{legend_y + 12}" class="text text-dim" font-size="13">Less</text>')
         for i in range(5):
             lx = legend_x + i * (box_size + gap)
             level_var = f"{{{{LC_HEATMAP_L{i}}}}}"
-            svg_rects.append(f'<rect x="{lx}" y="{legend_y}" width="{box_size}" height="{box_size}" rx="2" fill="{level_var}" />')
-        svg_rects.append(f'<text x="{legend_x + 5 * (box_size + gap) + 10}" y="{legend_y + 11}" class="text text-dim" font-size="12">More</text>')
+            svg_rects.append(f'<rect x="{lx}" y="{legend_y}" width="{box_size}" height="{box_size}" rx="3" fill="{level_var}" />')
+        svg_rects.append(f'<text x="{legend_x + 5 * (box_size + gap) + 10}" y="{legend_y + 12}" class="text text-dim" font-size="13">More</text>')
                 
-        return "\n".join(svg_rects), (rows * (box_size + gap) + 40)
+        return "\n".join(svg_rects), (rows * (box_size + gap) + 50)
 
     def render(self, output_path: str, theme_name: str, github_stats: dict, leetcode_stats: dict):
         content = self.template_content
@@ -269,42 +290,47 @@ class ProfileRenderer:
         
         lc_box_y = current_y
         lc_cy = current_y + 40
+        lc_box_index = len(svg_parts)
         
         # Content inside box
+        total = int(leetcode_stats.get("LC_SOLVED", 0))
         svg_parts.append(f'<text x="60" y="{lc_cy}" class="text keyword">User: <tspan class="value">{config.LEETCODE_USERNAME}</tspan></text>')
         svg_parts.append(f'<text x="360" y="{lc_cy}" class="text keyword">Rank: <tspan class="value">{leetcode_stats.get("LC_RANKING", "N/A")}</tspan></text>')
         svg_parts.append(f'<text x="660" y="{lc_cy}" class="text keyword">Rating: <tspan class="value">{leetcode_stats.get("LC_RATING", "N/A")}</tspan></text>')
+        svg_parts.append(f'<text x="960" y="{lc_cy}" class="text keyword">Total Solved: <tspan class="value">{total}</tspan></text>')
         
         lc_cy += 60
         easy = int(leetcode_stats.get("LC_EASY", 0))
         med = int(leetcode_stats.get("LC_MEDIUM", 0))
         hard = int(leetcode_stats.get("LC_HARD", 0))
-        total = int(leetcode_stats.get("LC_SOLVED", 0))
         
-        bar_w = 400
-        def draw_lc_bar(x, y, label, val, color):
-            pct = (val / max(1, total)) * bar_w
+        def draw_difficulty_card(x, y, label, val, total_val, color):
+            card_w = 450
+            card_h = 80
+            pct = (val / max(1, total_val)) * (card_w - 40)
             return f'''
-            <text x="{x}" y="{y}" class="text">{label}</text>
-            <text x="{x + bar_w}" y="{y}" class="text value" text-anchor="end">{val}</text>
-            <rect x="{x}" y="{y + 10}" width="{bar_w}" height="8" rx="4" class="chart-bar-bg" />
-            <rect x="{x}" y="{y + 10}" width="{pct}" height="8" rx="4" fill="{color}" />
+            <rect x="{x}" y="{y}" width="{card_w}" height="{card_h}" rx="8" class="pane-border" style="stroke: {color}; stroke-opacity: 0.3;" />
+            <rect x="{x}" y="{y}" width="{card_w}" height="{card_h}" rx="8" fill="{color}" fill-opacity="0.05" />
+            <text x="{x + 20}" y="{y + 35}" class="text" font-size="18" fill="{color}" font-weight="600">{label}</text>
+            <text x="{x + card_w - 20}" y="{y + 35}" class="text value" font-size="22" text-anchor="end" font-weight="bold">{val}</text>
+            <rect x="{x + 20}" y="{y + 55}" width="{card_w - 40}" height="6" rx="3" class="chart-bar-bg" />
+            <rect x="{x + 20}" y="{y + 55}" width="{pct}" height="6" rx="3" fill="{color}" />
             '''
         
-        svg_parts.append(draw_lc_bar(60, lc_cy, "Easy", easy, "#28a745"))
-        svg_parts.append(draw_lc_bar(560, lc_cy, "Medium", med, "#ffc107"))
-        svg_parts.append(draw_lc_bar(1060, lc_cy, "Hard", hard, "#dc3545"))
+        svg_parts.append(draw_difficulty_card(60, lc_cy, "Easy", easy, total, "#00b8a3"))
+        svg_parts.append(draw_difficulty_card(540, lc_cy, "Medium", med, total, "#ffc01e"))
+        svg_parts.append(draw_difficulty_card(1020, lc_cy, "Hard", hard, total, "#ef4743"))
         
-        lc_cy += 80
+        lc_cy += 110
         svg_parts.append(f'<text x="60" y="{lc_cy}" class="pane-title">Submission Calendar</text>')
-        lc_cy += 20
+        lc_cy += 30
         cal_data = leetcode_stats.get("LC_CALENDAR", {})
         heatmap_svg, hm_height = self.render_heatmap(cal_data, 60, lc_cy, 1480)
         svg_parts.append(heatmap_svg)
         
         lc_cy += hm_height
         lc_box_h = lc_cy - lc_box_y
-        svg_parts.insert(len(svg_parts) - 6, render_box(40, lc_box_y, 1520, lc_box_h, "LeetCode Analytics"))
+        svg_parts.insert(lc_box_index, render_box(40, lc_box_y, 1520, lc_box_h, "LeetCode Analytics"))
         
         current_y = lc_box_y + lc_box_h + 60
         
