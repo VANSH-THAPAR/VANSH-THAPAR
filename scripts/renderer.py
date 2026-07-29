@@ -299,29 +299,67 @@ class ProfileRenderer:
         svg_parts.append(f'<text x="660" y="{lc_cy}" class="text keyword">Rating: <tspan class="value">{leetcode_stats.get("LC_RATING", "N/A")}</tspan></text>')
         svg_parts.append(f'<text x="960" y="{lc_cy}" class="text keyword">Total Solved: <tspan class="value">{total}</tspan></text>')
         
-        lc_cy += 60
+        lc_cy += 120
         easy = int(leetcode_stats.get("LC_EASY", 0))
         med = int(leetcode_stats.get("LC_MEDIUM", 0))
         hard = int(leetcode_stats.get("LC_HARD", 0))
         
-        def draw_difficulty_card(x, y, label, val, total_val, color):
-            card_w = 450
-            card_h = 80
-            pct = (val / max(1, total_val)) * (card_w - 40)
+        # --- DONUT CHART ---
+        donut_cx = 250
+        donut_cy = lc_cy
+        donut_r = 80
+        donut_thickness = 24
+        
+        import math
+        circumference = 2 * math.pi * donut_r
+        
+        # Background track
+        svg_parts.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="transparent" class="chart-bar-bg" stroke-width="{donut_thickness}" />')
+        
+        if total > 0:
+            e_pct = easy / total
+            m_pct = med / total
+            h_pct = hard / total
+            
+            e_len = e_pct * circumference
+            m_len = m_pct * circumference
+            h_len = h_pct * circumference
+            
+            # Draw segments (Easy -> Medium -> Hard)
+            # stroke-dasharray="length circumference"
+            
+            # Easy
+            svg_parts.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="transparent" stroke="#00b8a3" stroke-width="{donut_thickness}" stroke-dasharray="{e_len} {circumference}" stroke-dashoffset="0" transform="rotate(-90 {donut_cx} {donut_cy})" />')
+            
+            # Medium
+            svg_parts.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="transparent" stroke="#ffc01e" stroke-width="{donut_thickness}" stroke-dasharray="{m_len} {circumference}" stroke-dashoffset="-{e_len}" transform="rotate(-90 {donut_cx} {donut_cy})" />')
+            
+            # Hard
+            svg_parts.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="transparent" stroke="#ef4743" stroke-width="{donut_thickness}" stroke-dasharray="{h_len} {circumference}" stroke-dashoffset="-{e_len + m_len}" transform="rotate(-90 {donut_cx} {donut_cy})" />')
+        
+        # Donut Center Text
+        svg_parts.append(f'<text x="{donut_cx}" y="{donut_cy - 5}" class="text value" font-size="34" font-weight="bold" text-anchor="middle">{total}</text>')
+        svg_parts.append(f'<text x="{donut_cx}" y="{donut_cy + 20}" class="text text-dim" font-size="14" text-anchor="middle">Solved</text>')
+        
+        # --- STATS LEGEND ---
+        legend_start_x = 450
+        
+        def draw_legend_item(x, y, label, val, total_val, color):
+            pct = (val / max(1, total_val)) * 100
             return f'''
-            <rect x="{x}" y="{y}" width="{card_w}" height="{card_h}" rx="8" class="pane-border" style="stroke: {color}; stroke-opacity: 0.3;" />
-            <rect x="{x}" y="{y}" width="{card_w}" height="{card_h}" rx="8" fill="{color}" fill-opacity="0.05" />
-            <text x="{x + 20}" y="{y + 35}" class="text" font-size="18" fill="{color}" font-weight="600">{label}</text>
-            <text x="{x + card_w - 20}" y="{y + 35}" class="text value" font-size="22" text-anchor="end" font-weight="bold">{val}</text>
-            <rect x="{x + 20}" y="{y + 55}" width="{card_w - 40}" height="6" rx="3" class="chart-bar-bg" />
-            <rect x="{x + 20}" y="{y + 55}" width="{pct}" height="6" rx="3" fill="{color}" />
+            <rect x="{x}" y="{y}" width="280" height="70" rx="8" class="pane-border" style="stroke: {color}; stroke-opacity: 0.2;" />
+            <rect x="{x}" y="{y}" width="280" height="70" rx="8" fill="{color}" fill-opacity="0.05" />
+            <circle cx="{x + 25}" cy="{y + 35}" r="8" fill="{color}" />
+            <text x="{x + 45}" y="{y + 31}" class="text" font-size="16" fill="{color}" font-weight="600">{label}</text>
+            <text x="{x + 45}" y="{y + 51}" class="text text-dim" font-size="13">{pct:.1f}%</text>
+            <text x="{x + 260}" y="{y + 42}" class="text value" font-size="24" text-anchor="end" font-weight="bold">{val}</text>
             '''
         
-        svg_parts.append(draw_difficulty_card(60, lc_cy, "Easy", easy, total, "#00b8a3"))
-        svg_parts.append(draw_difficulty_card(540, lc_cy, "Medium", med, total, "#ffc01e"))
-        svg_parts.append(draw_difficulty_card(1020, lc_cy, "Hard", hard, total, "#ef4743"))
+        svg_parts.append(draw_legend_item(legend_start_x, lc_cy - 75, "Easy", easy, total, "#00b8a3"))
+        svg_parts.append(draw_legend_item(legend_start_x, lc_cy + 5, "Medium", med, total, "#ffc01e"))
+        svg_parts.append(draw_legend_item(legend_start_x + 320, lc_cy - 75, "Hard", hard, total, "#ef4743"))
         
-        lc_cy += 110
+        lc_cy += 120
         svg_parts.append(f'<text x="60" y="{lc_cy}" class="pane-title">Submission Calendar</text>')
         lc_cy += 30
         cal_data = leetcode_stats.get("LC_CALENDAR", {})
