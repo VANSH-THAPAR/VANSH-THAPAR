@@ -80,12 +80,12 @@
     
 <text x="560" y="984" class="text">Contributions</text>
 <rect x="710" y="974" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="974" width="171.02" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="984" class="text value" font-size="14">1006</text>
+<rect x="710" y="974" width="171.18999999999997" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="984" class="text value" font-size="14">1007</text>
 <text x="560" y="1034" class="text">Commits</text>
 <rect x="710" y="1024" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="1024" width="150.62" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="1034" class="text value" font-size="14">443</text>
+<rect x="710" y="1024" width="150.96" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="1034" class="text value" font-size="14">444</text>
 
     <rect x="1120" y="924" width="440" height="160" rx="6" class="pane-border"/>
     <rect x="1135" y="914" width="143.5" height="20" class="window" />
