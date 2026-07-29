@@ -71,7 +71,7 @@
     <text x="65" y="929" class="pane-title">Repository Overview</text>
     
 <text x="60" y="969" class="text">Stars:      <tspan class="value">7</tspan></text>
-<text x="60" y="1009" class="text">Repos:      <tspan class="value">64</tspan></text>
+<text x="60" y="1009" class="text">Repos:      <tspan class="value">76</tspan></text>
 <text x="60" y="1049" class="text">Followers:  <tspan class="value">20</tspan></text>
 
     <rect x="540" y="924" width="560" height="160" rx="6" class="pane-border"/>
