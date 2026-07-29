@@ -305,10 +305,10 @@ class ProfileRenderer:
         hard = int(leetcode_stats.get("LC_HARD", 0))
         
         # --- DONUT CHART ---
-        donut_cx = 250
+        donut_cx = 310
         donut_cy = lc_cy
-        donut_r = 80
-        donut_thickness = 24
+        donut_r = 75
+        donut_thickness = 22
         
         import math
         circumference = 2 * math.pi * donut_r
@@ -326,24 +326,15 @@ class ProfileRenderer:
             h_len = h_pct * circumference
             
             # Draw segments (Easy -> Medium -> Hard)
-            # stroke-dasharray="length circumference"
-            
-            # Easy
             svg_parts.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="transparent" stroke="#00b8a3" stroke-width="{donut_thickness}" stroke-dasharray="{e_len} {circumference}" stroke-dashoffset="0" transform="rotate(-90 {donut_cx} {donut_cy})" />')
-            
-            # Medium
             svg_parts.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="transparent" stroke="#ffc01e" stroke-width="{donut_thickness}" stroke-dasharray="{m_len} {circumference}" stroke-dashoffset="-{e_len}" transform="rotate(-90 {donut_cx} {donut_cy})" />')
-            
-            # Hard
             svg_parts.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="{donut_r}" fill="transparent" stroke="#ef4743" stroke-width="{donut_thickness}" stroke-dasharray="{h_len} {circumference}" stroke-dashoffset="-{e_len + m_len}" transform="rotate(-90 {donut_cx} {donut_cy})" />')
         
         # Donut Center Text
-        svg_parts.append(f'<text x="{donut_cx}" y="{donut_cy - 5}" class="text value" font-size="34" font-weight="bold" text-anchor="middle">{total}</text>')
+        svg_parts.append(f'<text x="{donut_cx}" y="{donut_cy - 5}" class="text value" font-size="32" font-weight="bold" text-anchor="middle">{total}</text>')
         svg_parts.append(f'<text x="{donut_cx}" y="{donut_cy + 20}" class="text text-dim" font-size="14" text-anchor="middle">Solved</text>')
         
         # --- STATS LEGEND ---
-        legend_start_x = 450
-        
         def draw_legend_item(x, y, label, val, total_val, color):
             pct = (val / max(1, total_val)) * 100
             return f'''
@@ -355,9 +346,10 @@ class ProfileRenderer:
             <text x="{x + 260}" y="{y + 42}" class="text value" font-size="24" text-anchor="end" font-weight="bold">{val}</text>
             '''
         
-        svg_parts.append(draw_legend_item(legend_start_x, lc_cy - 75, "Easy", easy, total, "#00b8a3"))
-        svg_parts.append(draw_legend_item(legend_start_x, lc_cy + 5, "Medium", med, total, "#ffc01e"))
-        svg_parts.append(draw_legend_item(legend_start_x + 320, lc_cy - 75, "Hard", hard, total, "#ef4743"))
+        legend_y = lc_cy - 35
+        svg_parts.append(draw_legend_item(470, legend_y, "Easy", easy, total, "#00b8a3"))
+        svg_parts.append(draw_legend_item(790, legend_y, "Medium", med, total, "#ffc01e"))
+        svg_parts.append(draw_legend_item(1110, legend_y, "Hard", hard, total, "#ef4743"))
         
         lc_cy += 120
         svg_parts.append(f'<text x="60" y="{lc_cy}" class="pane-title">Submission Calendar</text>')
