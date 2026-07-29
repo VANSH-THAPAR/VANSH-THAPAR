@@ -70,9 +70,9 @@
     <rect x="55" y="914" width="200.5" height="20" class="window" />
     <text x="65" y="929" class="pane-title">Repository Overview</text>
     
-<text x="60" y="969" class="text">Stars:      <tspan class="value">7</tspan></text>
-<text x="60" y="1009" class="text">Repos:      <tspan class="value">64</tspan></text>
-<text x="60" y="1049" class="text">Followers:  <tspan class="value">20</tspan></text>
+<text x="60" y="969" class="text">Stars:      <tspan class="value">0</tspan></text>
+<text x="60" y="1009" class="text">Repos:      <tspan class="value">0</tspan></text>
+<text x="60" y="1049" class="text">Followers:  <tspan class="value">0</tspan></text>
 
     <rect x="540" y="924" width="560" height="160" rx="6" class="pane-border"/>
     <rect x="555" y="914" width="219.5" height="20" class="window" />
@@ -80,12 +80,12 @@
     
 <text x="560" y="984" class="text">Contributions</text>
 <rect x="710" y="974" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="974" width="170.17" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="984" class="text value" font-size="14">1001</text>
+<rect x="710" y="974" width="0.0" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="984" class="text value" font-size="14">0</text>
 <text x="560" y="1034" class="text">Commits</text>
 <rect x="710" y="1024" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="1024" width="149.26" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="1034" class="text value" font-size="14">439</text>
+<rect x="710" y="1024" width="0.0" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="1034" class="text value" font-size="14">0</text>
 
     <rect x="1120" y="924" width="440" height="160" rx="6" class="pane-border"/>
     <rect x="1135" y="914" width="143.5" height="20" class="window" />
@@ -96,7 +96,7 @@
 <text class="text">
 <tspan x="40" y="1144"><tspan class="prompt">vansh@thapar:~$</tspan><tspan class="text"> leetcode</tspan></tspan>
 </text>
-<text x="60" y="1214" class="text keyword">User: <tspan class="value">VANSHTHAPAR</tspan></text>
+<text x="60" y="1214" class="text keyword">User: <tspan class="value">vanshthapar</tspan></text>
 <text x="360" y="1214" class="text keyword">Rank: <tspan class="value">676907</tspan></text>
 
     <rect x="40" y="1174" width="1520" height="366" rx="6" class="pane-border"/>
@@ -108,19 +108,19 @@
             <text x="60" y="1274" class="text">Easy</text>
             <text x="460" y="1274" class="text value" text-anchor="end">116</text>
             <rect x="60" y="1284" width="400" height="8" rx="4" class="chart-bar-bg" />
-            <rect x="60" y="1284" width="198.2905982905983" height="8" rx="4" fill="#28a745" />
+            <rect x="60" y="1284" width="197.4468085106383" height="8" rx="4" fill="#28a745" />
             
 
             <text x="560" y="1274" class="text">Medium</text>
-            <text x="960" y="1274" class="text value" text-anchor="end">111</text>
+            <text x="960" y="1274" class="text value" text-anchor="end">112</text>
             <rect x="560" y="1284" width="400" height="8" rx="4" class="chart-bar-bg" />
-            <rect x="560" y="1284" width="189.74358974358972" height="8" rx="4" fill="#ffc107" />
+            <rect x="560" y="1284" width="190.63829787234044" height="8" rx="4" fill="#ffc107" />
             
 
             <text x="1060" y="1274" class="text">Hard</text>
             <text x="1460" y="1274" class="text value" text-anchor="end">7</text>
             <rect x="1060" y="1284" width="400" height="8" rx="4" class="chart-bar-bg" />
-            <rect x="1060" y="1284" width="11.965811965811966" height="8" rx="4" fill="#dc3545" />
+            <rect x="1060" y="1284" width="11.914893617021278" height="8" rx="4" fill="#dc3545" />
             
 <text x="60" y="1354" class="pane-title">Submission Calendar</text>
 <rect x="332.0" y="1374" width="14" height="14" rx="3" fill="{{LC_HEATMAP_L0}}" />

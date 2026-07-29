@@ -157,22 +157,6 @@ class ProfileRenderer:
             raise ValueError("CRITICAL ERROR: Placeholder {{CONTENT}} is missing from template.svg!")
             
         theme = config.THEMES.get(theme_name, config.THEMES["dark"])
-        for k, v in theme.items():
-            content = content.replace(f"{{{{{k.upper()}}}}}", v)
-            
-        if theme_name == "dark":
-            content = content.replace("{{LC_HEATMAP_L0}}", theme.get("border_color", "#30363d"))
-            content = content.replace("{{LC_HEATMAP_L1}}", "#0e4429")
-            content = content.replace("{{LC_HEATMAP_L2}}", "#006d32")
-            content = content.replace("{{LC_HEATMAP_L3}}", "#26a641")
-            content = content.replace("{{LC_HEATMAP_L4}}", "#39d353")
-        else:
-            content = content.replace("{{LC_HEATMAP_L0}}", "#ebedf0")
-            content = content.replace("{{LC_HEATMAP_L1}}", "#9be9a8")
-            content = content.replace("{{LC_HEATMAP_L2}}", "#40c463")
-            content = content.replace("{{LC_HEATMAP_L3}}", "#30a14e")
-            content = content.replace("{{LC_HEATMAP_L4}}", "#216e39")
-            
         svg_parts = []
         current_y = 80
         
@@ -335,6 +319,22 @@ class ProfileRenderer:
         
         content = content.replace("{{CANVAS_HEIGHT}}", str(int(current_y)))
         content = content.replace("{{CONTENT}}", "\n".join(svg_parts))
+        
+        for k, v in theme.items():
+            content = content.replace(f"{{{{{k.upper()}}}}}", v)
+            
+        if theme_name == "dark":
+            content = content.replace("{{LC_HEATMAP_L0}}", theme.get("border_color", "#30363d"))
+            content = content.replace("{{LC_HEATMAP_L1}}", "#0e4429")
+            content = content.replace("{{LC_HEATMAP_L2}}", "#006d32")
+            content = content.replace("{{LC_HEATMAP_L3}}", "#26a641")
+            content = content.replace("{{LC_HEATMAP_L4}}", "#39d353")
+        else:
+            content = content.replace("{{LC_HEATMAP_L0}}", "#ebedf0")
+            content = content.replace("{{LC_HEATMAP_L1}}", "#9be9a8")
+            content = content.replace("{{LC_HEATMAP_L2}}", "#40c463")
+            content = content.replace("{{LC_HEATMAP_L3}}", "#30a14e")
+            content = content.replace("{{LC_HEATMAP_L4}}", "#216e39")
         
         logger.info(f"Placeholder replacement success for {theme_name} mode. Dynamic Canvas Height: {int(current_y)}")
             
