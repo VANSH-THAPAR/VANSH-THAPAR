@@ -21,7 +21,7 @@ def fetch_github_stats() -> dict:
       user(login: $login) {
         followers { totalCount }
         following { totalCount }
-        repositories(ownerAffiliations: OWNER, isFork: false) {
+        repositories(ownerAffiliations: OWNER) {
           totalCount
         }
         starredRepositories { totalCount }
