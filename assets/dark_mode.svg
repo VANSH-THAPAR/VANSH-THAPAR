@@ -72,7 +72,7 @@
     
 <text x="60" y="969" class="text">Stars:      <tspan class="value">7</tspan></text>
 <text x="60" y="1009" class="text">Repos:      <tspan class="value">76</tspan></text>
-<text x="60" y="1049" class="text">Followers:  <tspan class="value">20</tspan></text>
+<text x="60" y="1049" class="text">Followers:  <tspan class="value">21</tspan></text>
 
     <rect x="540" y="924" width="560" height="160" rx="6" class="pane-border"/>
     <rect x="555" y="914" width="219.5" height="20" class="window" />
@@ -102,7 +102,7 @@
     <text x="65" y="1179" class="pane-title">LeetCode Analytics</text>
     
 <text x="60" y="1214" class="text keyword">User: <tspan class="value">VANSHTHAPAR</tspan></text>
-<text x="360" y="1214" class="text keyword">Rank: <tspan class="value">673876</tspan></text>
+<text x="360" y="1214" class="text keyword">Rank: <tspan class="value">670742</tspan></text>
 <text x="660" y="1214" class="text keyword">Rating: <tspan class="value">N/A</tspan></text>
 <text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">236</tspan></text>
 <circle cx="310" cy="1334" r="75" fill="transparent" class="chart-bar-bg" stroke-width="22" />
