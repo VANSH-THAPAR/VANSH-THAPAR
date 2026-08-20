@@ -80,8 +80,8 @@
     
 <text x="560" y="984" class="text">Contributions</text>
 <rect x="710" y="974" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="974" width="171.18999999999997" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="984" class="text value" font-size="14">1007</text>
+<rect x="710" y="974" width="171.36" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="984" class="text value" font-size="14">1008</text>
 <text x="560" y="1034" class="text">Commits</text>
 <rect x="710" y="1024" width="340" height="10" rx="3" class="chart-bar-bg" />
 <rect x="710" y="1024" width="137.70000000000002" height="10" rx="3" class="chart-bar-fg" />
@@ -514,7 +514,7 @@
 <rect x="1320.0" y="1544" width="15" height="15" rx="4" fill="#26a641" />
 <rect x="1320.0" y="1564" width="15" height="15" rx="4" fill="#006d32" />
 <rect x="1320.0" y="1584" width="15" height="15" rx="4" fill="#0e4429" />
-<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#30363d" />
+<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#0e4429" />
 <text x="1135.0" y="1656" class="text text-dim" font-size="13">Less</text>
 <rect x="1180.0" y="1644" width="15" height="15" rx="3" fill="#30363d" />
 <rect x="1200.0" y="1644" width="15" height="15" rx="3" fill="#0e4429" />
