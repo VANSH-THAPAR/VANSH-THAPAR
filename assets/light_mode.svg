@@ -80,8 +80,8 @@
     
 <text x="560" y="984" class="text">Contributions</text>
 <rect x="710" y="974" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="974" width="172.89" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="984" class="text value" font-size="14">1017</text>
+<rect x="710" y="974" width="173.06" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="984" class="text value" font-size="14">1018</text>
 <text x="560" y="1034" class="text">Commits</text>
 <rect x="710" y="1024" width="340" height="10" rx="3" class="chart-bar-bg" />
 <rect x="710" y="1024" width="136.0" height="10" rx="3" class="chart-bar-fg" />
@@ -102,7 +102,7 @@
     <text x="65" y="1179" class="pane-title">LeetCode Analytics</text>
     
 <text x="60" y="1214" class="text keyword">User: <tspan class="value">VANSHTHAPAR</tspan></text>
-<text x="360" y="1214" class="text keyword">Rank: <tspan class="value">574570</tspan></text>
+<text x="360" y="1214" class="text keyword">Rank: <tspan class="value">575012</tspan></text>
 <text x="660" y="1214" class="text keyword">Rating: <tspan class="value">N/A</tspan></text>
 <text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">270</tspan></text>
 <circle cx="310" cy="1334" r="75" fill="transparent" class="chart-bar-bg" stroke-width="22" />
@@ -515,7 +515,7 @@
 <rect x="1320.0" y="1544" width="15" height="15" rx="4" fill="#40c463" />
 <rect x="1320.0" y="1564" width="15" height="15" rx="4" fill="#9be9a8" />
 <rect x="1320.0" y="1584" width="15" height="15" rx="4" fill="#9be9a8" />
-<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#ebedf0" />
+<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#9be9a8" />
 <text x="1135.0" y="1656" class="text text-dim" font-size="13">Less</text>
 <rect x="1180.0" y="1644" width="15" height="15" rx="3" fill="#ebedf0" />
 <rect x="1200.0" y="1644" width="15" height="15" rx="3" fill="#9be9a8" />
