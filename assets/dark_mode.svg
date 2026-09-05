@@ -80,8 +80,8 @@
     
 <text x="560" y="984" class="text">Contributions</text>
 <rect x="710" y="974" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="974" width="179.86" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="984" class="text value" font-size="14">1058</text>
+<rect x="710" y="974" width="180.37" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="984" class="text value" font-size="14">1061</text>
 <text x="560" y="1034" class="text">Commits</text>
 <rect x="710" y="1024" width="340" height="10" rx="3" class="chart-bar-bg" />
 <rect x="710" y="1024" width="135.32" height="10" rx="3" class="chart-bar-fg" />
@@ -104,27 +104,27 @@
 <text x="60" y="1214" class="text keyword">User: <tspan class="value">VANSHTHAPAR</tspan></text>
 <text x="360" y="1214" class="text keyword">Rank: <tspan class="value">562017</tspan></text>
 <text x="660" y="1214" class="text keyword">Rating: <tspan class="value">N/A</tspan></text>
-<text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">276</tspan></text>
+<text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">277</tspan></text>
 <circle cx="310" cy="1334" r="75" fill="transparent" class="chart-bar-bg" stroke-width="22" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#00b8a3" stroke-width="22" stroke-dasharray="227.08251246056656 471.23889803846896" stroke-dashoffset="0" transform="rotate(-90 310 1334)" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ffc01e" stroke-width="22" stroke-dasharray="228.78989977230015 471.23889803846896" stroke-dashoffset="-227.08251246056656" transform="rotate(-90 310 1334)" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ef4743" stroke-width="22" stroke-dasharray="15.366485805602249 471.23889803846896" stroke-dashoffset="-455.87241223286674" transform="rotate(-90 310 1334)" />
-<text x="310" y="1329" class="text value" font-size="32" font-weight="bold" text-anchor="middle">276</text>
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#00b8a3" stroke-width="22" stroke-dasharray="227.96394345543263 471.23889803846896" stroke-dashoffset="0" transform="rotate(-90 310 1334)" />
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ffc01e" stroke-width="22" stroke-dasharray="227.96394345543263 471.23889803846896" stroke-dashoffset="-227.96394345543263" transform="rotate(-90 310 1334)" />
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ef4743" stroke-width="22" stroke-dasharray="15.311011127603683 471.23889803846896" stroke-dashoffset="-455.92788691086525" transform="rotate(-90 310 1334)" />
+<text x="310" y="1329" class="text value" font-size="32" font-weight="bold" text-anchor="middle">277</text>
 <text x="310" y="1354" class="text text-dim" font-size="14" text-anchor="middle">Solved</text>
 
             <rect x="470" y="1299" width="280" height="70" rx="8" class="pane-border" style="stroke: #00b8a3; stroke-opacity: 0.2;" />
             <rect x="470" y="1299" width="280" height="70" rx="8" fill="#00b8a3" fill-opacity="0.05" />
             <circle cx="495" cy="1334" r="8" fill="#00b8a3" />
             <text x="515" y="1330" class="text" font-size="16" fill="#00b8a3" font-weight="600">Easy</text>
-            <text x="515" y="1350" class="text text-dim" font-size="13">48.2%</text>
-            <text x="730" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">133</text>
+            <text x="515" y="1350" class="text text-dim" font-size="13">48.4%</text>
+            <text x="730" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">134</text>
             
 
             <rect x="790" y="1299" width="280" height="70" rx="8" class="pane-border" style="stroke: #ffc01e; stroke-opacity: 0.2;" />
             <rect x="790" y="1299" width="280" height="70" rx="8" fill="#ffc01e" fill-opacity="0.05" />
             <circle cx="815" cy="1334" r="8" fill="#ffc01e" />
             <text x="835" y="1330" class="text" font-size="16" fill="#ffc01e" font-weight="600">Medium</text>
-            <text x="835" y="1350" class="text text-dim" font-size="13">48.6%</text>
+            <text x="835" y="1350" class="text text-dim" font-size="13">48.4%</text>
             <text x="1050" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">134</text>
             
 
@@ -132,7 +132,7 @@
             <rect x="1110" y="1299" width="280" height="70" rx="8" fill="#ef4743" fill-opacity="0.05" />
             <circle cx="1135" cy="1334" r="8" fill="#ef4743" />
             <text x="1155" y="1330" class="text" font-size="16" fill="#ef4743" font-weight="600">Hard</text>
-            <text x="1155" y="1350" class="text text-dim" font-size="13">3.3%</text>
+            <text x="1155" y="1350" class="text text-dim" font-size="13">3.2%</text>
             <text x="1370" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">9</text>
             
 <text x="60" y="1454" class="pane-title">Submission Calendar</text>
@@ -514,7 +514,7 @@
 <rect x="1320.0" y="1544" width="15" height="15" rx="4" fill="#006d32" />
 <rect x="1320.0" y="1564" width="15" height="15" rx="4" fill="#006d32" />
 <rect x="1320.0" y="1584" width="15" height="15" rx="4" fill="#006d32" />
-<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#0e4429" />
+<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#006d32" />
 <text x="1135.0" y="1656" class="text text-dim" font-size="13">Less</text>
 <rect x="1180.0" y="1644" width="15" height="15" rx="3" fill="#30363d" />
 <rect x="1200.0" y="1644" width="15" height="15" rx="3" fill="#0e4429" />
