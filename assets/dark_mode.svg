@@ -71,7 +71,7 @@
     <text x="65" y="929" class="pane-title">Repository Overview</text>
     
 <text x="60" y="969" class="text">Stars:      <tspan class="value">7</tspan></text>
-<text x="60" y="1009" class="text">Repos:      <tspan class="value">78</tspan></text>
+<text x="60" y="1009" class="text">Repos:      <tspan class="value">79</tspan></text>
 <text x="60" y="1049" class="text">Followers:  <tspan class="value">21</tspan></text>
 
     <rect x="540" y="924" width="560" height="160" rx="6" class="pane-border"/>
@@ -80,8 +80,8 @@
     
 <text x="560" y="984" class="text">Contributions</text>
 <rect x="710" y="974" width="340" height="10" rx="3" class="chart-bar-bg" />
-<rect x="710" y="974" width="203.15" height="10" rx="3" class="chart-bar-fg" />
-<text x="1060" y="984" class="text value" font-size="14">1195</text>
+<rect x="710" y="974" width="204.17000000000002" height="10" rx="3" class="chart-bar-fg" />
+<text x="1060" y="984" class="text value" font-size="14">1201</text>
 <text x="560" y="1034" class="text">Commits</text>
 <rect x="710" y="1024" width="340" height="10" rx="3" class="chart-bar-bg" />
 <rect x="710" y="1024" width="121.38" height="10" rx="3" class="chart-bar-fg" />
@@ -104,19 +104,19 @@
 <text x="60" y="1214" class="text keyword">User: <tspan class="value">VANSHTHAPAR</tspan></text>
 <text x="360" y="1214" class="text keyword">Rank: <tspan class="value">462510</tspan></text>
 <text x="660" y="1214" class="text keyword">Rating: <tspan class="value">N/A</tspan></text>
-<text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">322</tspan></text>
+<text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">323</tspan></text>
 <circle cx="310" cy="1334" r="75" fill="transparent" class="chart-bar-bg" stroke-width="22" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#00b8a3" stroke-width="22" stroke-dasharray="218.05775095568904 471.23889803846896" stroke-dashoffset="0" transform="rotate(-90 310 1334)" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ffc01e" stroke-width="22" stroke-dasharray="237.08292385786325 471.23889803846896" stroke-dashoffset="-218.05775095568904" transform="rotate(-90 310 1334)" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ef4743" stroke-width="22" stroke-dasharray="16.09822322491664 471.23889803846896" stroke-dashoffset="-455.1406748135523" transform="rotate(-90 310 1334)" />
-<text x="310" y="1329" class="text value" font-size="32" font-weight="bold" text-anchor="middle">322</text>
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#00b8a3" stroke-width="22" stroke-dasharray="217.38264955954142 471.23889803846896" stroke-dashoffset="0" transform="rotate(-90 310 1334)" />
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ffc01e" stroke-width="22" stroke-dasharray="237.80786495439767 471.23889803846896" stroke-dashoffset="-217.38264955954142" transform="rotate(-90 310 1334)" />
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ef4743" stroke-width="22" stroke-dasharray="16.048383524529903 471.23889803846896" stroke-dashoffset="-455.1905145139391" transform="rotate(-90 310 1334)" />
+<text x="310" y="1329" class="text value" font-size="32" font-weight="bold" text-anchor="middle">323</text>
 <text x="310" y="1354" class="text text-dim" font-size="14" text-anchor="middle">Solved</text>
 
             <rect x="470" y="1299" width="280" height="70" rx="8" class="pane-border" style="stroke: #00b8a3; stroke-opacity: 0.2;" />
             <rect x="470" y="1299" width="280" height="70" rx="8" fill="#00b8a3" fill-opacity="0.05" />
             <circle cx="495" cy="1334" r="8" fill="#00b8a3" />
             <text x="515" y="1330" class="text" font-size="16" fill="#00b8a3" font-weight="600">Easy</text>
-            <text x="515" y="1350" class="text text-dim" font-size="13">46.3%</text>
+            <text x="515" y="1350" class="text text-dim" font-size="13">46.1%</text>
             <text x="730" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">149</text>
             
 
@@ -124,8 +124,8 @@
             <rect x="790" y="1299" width="280" height="70" rx="8" fill="#ffc01e" fill-opacity="0.05" />
             <circle cx="815" cy="1334" r="8" fill="#ffc01e" />
             <text x="835" y="1330" class="text" font-size="16" fill="#ffc01e" font-weight="600">Medium</text>
-            <text x="835" y="1350" class="text text-dim" font-size="13">50.3%</text>
-            <text x="1050" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">162</text>
+            <text x="835" y="1350" class="text text-dim" font-size="13">50.5%</text>
+            <text x="1050" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">163</text>
             
 
             <rect x="1110" y="1299" width="280" height="70" rx="8" class="pane-border" style="stroke: #ef4743; stroke-opacity: 0.2;" />
@@ -513,8 +513,8 @@
 <rect x="1320.0" y="1524" width="15" height="15" rx="4" fill="#39d353" />
 <rect x="1320.0" y="1544" width="15" height="15" rx="4" fill="#006d32" />
 <rect x="1320.0" y="1564" width="15" height="15" rx="4" fill="#26a641" />
-<rect x="1320.0" y="1584" width="15" height="15" rx="4" fill="#006d32" />
-<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#30363d" />
+<rect x="1320.0" y="1584" width="15" height="15" rx="4" fill="#26a641" />
+<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#0e4429" />
 <text x="1135.0" y="1656" class="text text-dim" font-size="13">Less</text>
 <rect x="1180.0" y="1644" width="15" height="15" rx="3" fill="#30363d" />
 <rect x="1200.0" y="1644" width="15" height="15" rx="3" fill="#0e4429" />
