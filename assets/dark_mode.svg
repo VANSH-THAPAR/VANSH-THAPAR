@@ -104,19 +104,19 @@
 <text x="60" y="1214" class="text keyword">User: <tspan class="value">VANSHTHAPAR</tspan></text>
 <text x="360" y="1214" class="text keyword">Rank: <tspan class="value">441417</tspan></text>
 <text x="660" y="1214" class="text keyword">Rating: <tspan class="value">N/A</tspan></text>
-<text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">334</tspan></text>
+<text x="960" y="1214" class="text keyword">Total Solved: <tspan class="value">335</tspan></text>
 <circle cx="310" cy="1334" r="75" fill="transparent" class="chart-bar-bg" stroke-width="22" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#00b8a3" stroke-width="22" stroke-dasharray="218.68871016755295 471.23889803846896" stroke-dashoffset="0" transform="rotate(-90 310 1334)" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ffc01e" stroke-width="22" stroke-dasharray="237.03034392354127 471.23889803846896" stroke-dashoffset="-218.68871016755295" transform="rotate(-90 310 1334)" />
-<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ef4743" stroke-width="22" stroke-dasharray="15.519843947374728 471.23889803846896" stroke-dashoffset="-455.7190540910942" transform="rotate(-90 310 1334)" />
-<text x="310" y="1329" class="text value" font-size="32" font-weight="bold" text-anchor="middle">334</text>
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#00b8a3" stroke-width="22" stroke-dasharray="218.03590804764983 471.23889803846896" stroke-dashoffset="0" transform="rotate(-90 310 1334)" />
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ffc01e" stroke-width="22" stroke-dasharray="237.72947393582464 471.23889803846896" stroke-dashoffset="-218.03590804764983" transform="rotate(-90 310 1334)" />
+<circle cx="310" cy="1334" r="75" fill="transparent" stroke="#ef4743" stroke-width="22" stroke-dasharray="15.473516054994503 471.23889803846896" stroke-dashoffset="-455.76538198347447" transform="rotate(-90 310 1334)" />
+<text x="310" y="1329" class="text value" font-size="32" font-weight="bold" text-anchor="middle">335</text>
 <text x="310" y="1354" class="text text-dim" font-size="14" text-anchor="middle">Solved</text>
 
             <rect x="470" y="1299" width="280" height="70" rx="8" class="pane-border" style="stroke: #00b8a3; stroke-opacity: 0.2;" />
             <rect x="470" y="1299" width="280" height="70" rx="8" fill="#00b8a3" fill-opacity="0.05" />
             <circle cx="495" cy="1334" r="8" fill="#00b8a3" />
             <text x="515" y="1330" class="text" font-size="16" fill="#00b8a3" font-weight="600">Easy</text>
-            <text x="515" y="1350" class="text text-dim" font-size="13">46.4%</text>
+            <text x="515" y="1350" class="text text-dim" font-size="13">46.3%</text>
             <text x="730" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">155</text>
             
 
@@ -124,8 +124,8 @@
             <rect x="790" y="1299" width="280" height="70" rx="8" fill="#ffc01e" fill-opacity="0.05" />
             <circle cx="815" cy="1334" r="8" fill="#ffc01e" />
             <text x="835" y="1330" class="text" font-size="16" fill="#ffc01e" font-weight="600">Medium</text>
-            <text x="835" y="1350" class="text text-dim" font-size="13">50.3%</text>
-            <text x="1050" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">168</text>
+            <text x="835" y="1350" class="text text-dim" font-size="13">50.4%</text>
+            <text x="1050" y="1341" class="text value" font-size="24" text-anchor="end" font-weight="bold">169</text>
             
 
             <rect x="1110" y="1299" width="280" height="70" rx="8" class="pane-border" style="stroke: #ef4743; stroke-opacity: 0.2;" />
@@ -515,7 +515,7 @@
 <rect x="1320.0" y="1544" width="15" height="15" rx="4" fill="#0e4429" />
 <rect x="1320.0" y="1564" width="15" height="15" rx="4" fill="#26a641" />
 <rect x="1320.0" y="1584" width="15" height="15" rx="4" fill="#39d353" />
-<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#006d32" />
+<rect x="1320.0" y="1604" width="15" height="15" rx="4" fill="#26a641" />
 <text x="1135.0" y="1656" class="text text-dim" font-size="13">Less</text>
 <rect x="1180.0" y="1644" width="15" height="15" rx="3" fill="#30363d" />
 <rect x="1200.0" y="1644" width="15" height="15" rx="3" fill="#0e4429" />
